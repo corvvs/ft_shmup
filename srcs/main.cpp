@@ -3,6 +3,8 @@
 #include <chrono>
 #include <thread>
 
+#include "ft_game.hpp"
+
 const int FPS = 30;
 
 void initialize();

@@ -27,8 +27,11 @@ namespace shmup
 		// Render game state
 		mvprintw(0, 0, "Press 'q' to quit");
 
-		for (auto &character : stage.get_characters())
+		const auto &characters = stage.get_characters();
+
+		for (auto it = characters.begin(); it != characters.end(); ++it)
 		{
+			const auto &character = it->second;
 			mvaddch(character.position.y, character.position.x, character.get_letter());
 		}
 

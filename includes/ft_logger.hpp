@@ -3,6 +3,7 @@
 
 #include <string>
 #include <fstream>
+#include "ft_common.hpp"
 
 const std::string DefaultLogFileName = "log.txt";
 

@@ -4,22 +4,22 @@ namespace shmup
 {
 	Game::Game(Core &core) : core(core), stage(core)
 	{
-		core.log() << std::endl
-				   << std::endl
-				   << "==== Session Started ====" << std::endl;
+		FTLOG << "==== Game Session Started ====" << std::endl;
 	}
 
 	Game::~Game()
 	{
-		core.log() << "==== Session Finished ====" << std::endl;
+		FTLOG << "==== Game Session Finished ====" << std::endl;
 	}
 
-	void Game::draw()
+	void Game::draw(std::uint64_t elapsed_time)
 	{
+		current_stage().update(elapsed_time);
 	}
 
 	void Game::input(KeyCode key)
 	{
+		FTLOG << "Key input: " << key << std::endl;
 		current_stage().input(key);
 	}
 

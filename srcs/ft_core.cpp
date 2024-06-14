@@ -6,8 +6,8 @@ namespace shmup
 	{
 	}
 
-	Logger &Core::log()
+	Logger &Core::log(const std::string &file, const int line)
 	{
-		return logger;
+		return logger << "[" << file << ":" << line << "] ";
 	}
 } // namespace shmpup

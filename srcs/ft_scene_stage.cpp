@@ -35,4 +35,9 @@ namespace shmup
 		core.log() << "Player moved to " << player.position.x << ", " << player.position.y << std::endl;
 	}
 
+	const std::vector<Character> &SceneStage::get_characters() const
+	{
+		return characters;
+	}
+
 } // namespace shmpup

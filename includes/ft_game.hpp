@@ -15,9 +15,6 @@ namespace shmup
 
 		SceneStage stage;
 
-		// 現在のステージへの参照を返す
-		SceneStage &current_stage();
-
 	public:
 		// ゲームを作成する
 		Game(Core &core);
@@ -33,6 +30,9 @@ namespace shmup
 		// ゲームに入力を与える.
 		// キーイベント発生時に呼び出される.
 		void input(KeyCode);
+
+		// 現在のステージへの参照を返す
+		SceneStage &current_stage();
 	};
 
 } // namespace shmpup

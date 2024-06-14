@@ -3,6 +3,7 @@
 
 #include "ft_enum.hpp"
 #include "ft_core.hpp"
+#include "ft_scene_stage.hpp"
 
 namespace shmup
 {
@@ -12,9 +13,16 @@ namespace shmup
 	private:
 		Core &core;
 
+		SceneStage stage;
+
+		// 現在のステージへの参照を返す
+		SceneStage &current_stage();
+
 	public:
 		// ゲームを作成する
 		Game(Core &core);
+
+		~Game();
 
 		// [インターフェース]
 

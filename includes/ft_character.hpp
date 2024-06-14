@@ -20,10 +20,11 @@ namespace shmup
 		// キャラクターの色
 		Color color;
 
+	public:
 		// キャラクターの現在位置
+		// 面倒なのでpublicにしてしまう
 		Vec position;
 
-	public:
 		Character(Core &core, CharacterType type, const Vec &initial_position);
 	};
 }

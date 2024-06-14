@@ -2,9 +2,8 @@
 
 namespace shmup
 {
-	Character::Character(Core &core, CharacterType type, const Vec &initial_position) : core(core)
+	Character::Character(Core &core, CharacterType type, const Vec &initial_position) : core(core), position(initial_position)
 	{
-		position = initial_position;
 		this->type = type;
 		switch (type)
 		{

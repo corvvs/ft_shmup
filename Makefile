@@ -18,9 +18,9 @@ NAME	:=	ft_shmup
 
 CXX			:=	c++
 CCOREFLAGS	=	-Wall -Wextra -std=gnu++0x -I$(INCDIR)
-CFLAGS		=	$(CCOREFLAGS) -O3\
-				# -D DEBUG\
-				# -g -fsanitize=address -fsanitize=undefined\
+CFLAGS		=	$(CCOREFLAGS)\
+				-D DEBUG\
+				-g -fsanitize=address -fsanitize=undefined\
 
 LFLAGS		:=	-lncurses
 

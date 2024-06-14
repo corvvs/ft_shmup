@@ -15,6 +15,10 @@ namespace shmup
 
 	public:
 		SceneStage(Core &core);
+
+		// ステージに入力を与える.
+		// キーイベント発生時に呼び出される.
+		void input(KeyCode);
 	};
 }
 

@@ -8,7 +8,7 @@
 
 const int FPS = 30;
 
-void handleInput(int ch);
+void handleInput(shmup::Game &game, int ch);
 void render();
 
 int main()
@@ -35,7 +35,7 @@ int main()
             }
             else
             {
-                handleInput(ch);
+                handleInput(game, ch);
             }
         }
 
@@ -58,22 +58,30 @@ int main()
     return 0;
 }
 
-void handleInput(int ch)
+void handleInput(shmup::Game &game, int ch)
 {
     // Handle input
     switch (ch)
     {
     case KEY_UP:
         // Handle up arrow key
+        game.input(shmup::KeyCode::UP);
         break;
     case KEY_DOWN:
         // Handle down arrow key
+        game.input(shmup::KeyCode::DOWN);
         break;
     case KEY_LEFT:
         // Handle left arrow key
+        game.input(shmup::KeyCode::LEFT);
         break;
     case KEY_RIGHT:
         // Handle right arrow key
+        game.input(shmup::KeyCode::RIGHT);
+        break;
+    case ' ':
+        // Handle space key
+        game.input(shmup::KeyCode::SPACE);
         break;
     default:
         break;

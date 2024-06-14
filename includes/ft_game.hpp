@@ -24,7 +24,7 @@ namespace shmup
 
 		// ゲームに入力を与える.
 		// キーイベント発生時に呼び出される.
-		void input(keycode);
+		void input(KeyCode);
 	};
 
 } // namespace shmpup

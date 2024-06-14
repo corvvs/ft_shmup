@@ -1,9 +1,33 @@
-#ifndef FT_ENUM_H
-#define FT_ENUM_H
+#ifndef FT_ENUM_HPP
+#define FT_ENUM_HPP
 
 namespace shmup
 {
-	enum keycode
+
+	// キャラクター
+	enum CharacterType
+	{
+		PLAYER,
+		BULLET,
+
+		ENEMY_0,
+	};
+
+	// 色
+	enum Color
+	{
+		BLACK,
+		RED,
+		GREEN,
+		YELLOW,
+		BLUE,
+		MAGENTA,
+		CYAN,
+		WHITE,
+	};
+
+	// キー入力
+	enum KeyCode
 	{
 		UP,
 		DOWN,

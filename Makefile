@@ -6,6 +6,9 @@ FILES	:=	\
 			ft_core.cpp\
 			ft_game.cpp\
 			ft_screen.cpp\
+			ft_scene_stage.cpp\
+			ft_character.cpp\
+			ft_position.cpp\
 			ft_logger.cpp\
 
 

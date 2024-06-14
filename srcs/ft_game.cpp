@@ -10,7 +10,7 @@ namespace shmup
 	{
 	}
 
-	void Game::input(keycode)
+	void Game::input(KeyCode)
 	{
 	}
 } // namespace shmpup

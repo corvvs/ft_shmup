@@ -26,14 +26,14 @@ namespace shmup
 		Logger &operator<<(std::ostream &(*manip)(std::ostream &));
 	};
 
-	template <typename T>
-	Logger &operator<<(Logger &me, const T &value)
-	{
-		me.ofs << value;
-		return me;
-	}
+	// template <typename T>
+	// Logger &operator<<(Logger &me, const T &value)
+	// {
+	// 	me.ofs << value;
+	// 	return me;
+	// }
 
-	Logger &operator<<(Logger &me, std::ostream &(*manip)(std::ostream &));
+	// Logger &operator<<(Logger &me, std::ostream &(*manip)(std::ostream &));
 } // namespace shmup
 
 #endif

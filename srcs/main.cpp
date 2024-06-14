@@ -3,23 +3,26 @@
 #include <chrono>
 #include <thread>
 
+#include "ft_game.hpp"
+#include "ft_screen.hpp"
+
 const int FPS = 30;
 
-void initialize();
-void cleanup();
-void handleInput(int ch);
-void update();
+void handleInput(shmup::Game &game, int ch);
 void render();
 
 int main()
 {
-    initialize();
+    shmup::Core core;
+    shmup::Game game(core);
+    shmup::Screen screen(core);
 
     int ch;
     bool running = true;
     auto lastTime = std::chrono::high_resolution_clock::now();
     auto frameDuration = std::chrono::milliseconds(1000 / FPS);
 
+    // イベントループ
     while (running)
     {
         // Handle input
@@ -32,12 +35,12 @@ int main()
             }
             else
             {
-                handleInput(ch);
+                handleInput(game, ch);
             }
         }
 
         // Update game state
-        update();
+        game.draw();
 
         // Render the screen
         render();
@@ -52,51 +55,37 @@ int main()
         lastTime = currentTime;
     }
 
-    cleanup();
     return 0;
 }
 
-void initialize()
-{
-    initscr();             // Start curses mode
-    cbreak();              // Line buffering disabled
-    noecho();              // Don't echo while we do getch
-    nodelay(stdscr, TRUE); // Non-blocking input
-    keypad(stdscr, TRUE);  // Enable F1, F2, arrow keys, etc.
-    curs_set(0);           // Hide the cursor
-    timeout(0);            // Non-blocking input
-}
-
-void cleanup()
-{
-    endwin(); // End curses mode
-}
-
-void handleInput(int ch)
+void handleInput(shmup::Game &game, int ch)
 {
     // Handle input
     switch (ch)
     {
     case KEY_UP:
         // Handle up arrow key
+        game.input(shmup::KeyCode::UP);
         break;
     case KEY_DOWN:
         // Handle down arrow key
+        game.input(shmup::KeyCode::DOWN);
         break;
     case KEY_LEFT:
         // Handle left arrow key
+        game.input(shmup::KeyCode::LEFT);
         break;
     case KEY_RIGHT:
         // Handle right arrow key
+        game.input(shmup::KeyCode::RIGHT);
+        break;
+    case ' ':
+        // Handle space key
+        game.input(shmup::KeyCode::SPACE);
         break;
     default:
         break;
     }
-}
-
-void update()
-{
-    // Update game state
 }
 
 void render()

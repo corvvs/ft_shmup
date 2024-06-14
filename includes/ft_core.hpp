@@ -1,6 +1,7 @@
 #ifndef FT_CORE_HPP
 #define FT_CORE_HPP
 
+#include <string>
 #include "ft_logger.hpp"
 
 namespace shmup
@@ -13,7 +14,7 @@ namespace shmup
 	public:
 		Core();
 
-		Logger &log();
+		Logger &log(const std::string &file = __FILE__, const int line = __LINE__);
 	};
 
 } // namespace shmpup

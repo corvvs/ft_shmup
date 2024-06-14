@@ -5,17 +5,35 @@ namespace shmup
 {
 	SceneStage::SceneStage(Core &core) : core(core)
 	{
-		characters.push_back(Character(core, CharacterType::PLAYER, Vec(10, 10, 0)));
-		idx_player = 0;
+		id_player_1 = add_character(Character(core, CharacterType::PLAYER, Vec(10, 10, 0)));
+	}
+
+	size_t SceneStage::add_character(const Character &ch)
+	{
+		size_t idx = char_idx++;
+		characters.insert(std::make_pair(idx, ch));
+		FTLOG << "Character added: " << ch.get_letter() << " at " << ch.position.x << ", " << ch.position.y << std::endl;
+		return idx;
+	}
+
+	Character &SceneStage::get_player()
+	{
+		return characters.find(id_player_1)->second;
+	};
+
+	Character &SceneStage::get_character(size_t idx)
+	{
+		return characters.find(idx)->second;
 	}
 
 	void SceneStage::input(KeyCode key)
 	{
 
-		Character &player = characters[idx_player];
+		Character &player = get_player();
 
 		switch (key)
 		{
+			// 移動
 		case KeyCode::UP:
 			player.position.y--;
 			break;
@@ -28,16 +46,51 @@ namespace shmup
 		case KeyCode::RIGHT:
 			player.position.x++;
 			break;
+			// 射撃
+		case KeyCode::SPACE:
+			fire_bullet();
+			break;
 		default:
 			break;
 		}
 
-		core.log() << "Player moved to " << player.position.x << ", " << player.position.y << std::endl;
+		FTLOG << "Player moved to " << player.position.x << ", " << player.position.y << std::endl;
 	}
 
-	const std::vector<Character> &SceneStage::get_characters() const
+	void SceneStage::fire_bullet()
+	{
+		Character &player = get_player();
+		{
+			Character bullet(core, CharacterType::BULLET, player.position);
+			size_t idx = add_character(bullet);
+			get_character(idx).velocity.y = -1 / 60.0;
+		}
+		double w3way = 0.4;
+		{
+			Character bullet(core, CharacterType::BULLET, player.position);
+			size_t idx = add_character(bullet);
+			get_character(idx).velocity.x = -w3way / 60.0;
+			get_character(idx).velocity.y = -1 / 60.0;
+		}
+		{
+			Character bullet(core, CharacterType::BULLET, player.position);
+			size_t idx = add_character(bullet);
+			get_character(idx).velocity.x = +w3way / 60.0;
+			get_character(idx).velocity.y = -1 / 60.0;
+		}
+	}
+
+	const std::map<size_t, Character> &SceneStage::get_characters() const
 	{
 		return characters;
+	}
+
+	void SceneStage::update(std::uint64_t elapsed_time)
+	{
+		for (auto &pair : characters)
+		{
+			pair.second.update(elapsed_time);
+		}
 	}
 
 } // namespace shmpup

@@ -3,13 +3,15 @@ OBJDIR	:=	objs
 INCDIR	:=	includes
 FILES	:=	\
 			main.cpp\
+			ft_logger.cpp\
+
 
 SRCS	:=	$(FILES:%.cpp=$(SRCDIR)/%.cpp)
 OBJS	:=	$(FILES:%.cpp=$(OBJDIR)/%.o)
 NAME	:=	ft_shmup
 
 CXX			:=	c++
-CCOREFLAGS	=	-Wall -Wextra -Werror -std=gnu++0x -I$(INCDIR)
+CCOREFLAGS	=	-Wall -Wextra -std=gnu++0x -I$(INCDIR)
 CFLAGS		=	$(CCOREFLAGS) -O3\
 				# -D DEBUG\
 				# -g -fsanitize=address -fsanitize=undefined\

@@ -59,24 +59,25 @@ namespace shmup
 
 	void SceneStage::fire_bullet()
 	{
+		double vy = 2.6;
+		double w3way = 0.6;
 		Character &player = get_player();
 		{
 			Character bullet(core, CharacterType::BULLET, player.position);
 			size_t idx = add_character(bullet);
-			get_character(idx).velocity.y = -1 / 60.0;
+			get_character(idx).velocity.y = -vy / 60.0;
 		}
-		double w3way = 0.4;
 		{
 			Character bullet(core, CharacterType::BULLET, player.position);
 			size_t idx = add_character(bullet);
 			get_character(idx).velocity.x = -w3way / 60.0;
-			get_character(idx).velocity.y = -1 / 60.0;
+			get_character(idx).velocity.y = -vy / 60.0;
 		}
 		{
 			Character bullet(core, CharacterType::BULLET, player.position);
 			size_t idx = add_character(bullet);
 			get_character(idx).velocity.x = +w3way / 60.0;
-			get_character(idx).velocity.y = -1 / 60.0;
+			get_character(idx).velocity.y = -vy / 60.0;
 		}
 	}
 
@@ -107,6 +108,8 @@ namespace shmup
 				break;
 			}
 		}
+
+		FTLOG << "Characters: " << characters.size() << std::endl;
 	}
 
 } // namespace shmpup

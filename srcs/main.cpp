@@ -3,12 +3,13 @@
 #include <chrono>
 #include <thread>
 
+#include "ft_core.hpp"
 #include "ft_game.hpp"
 #include "ft_screen.hpp"
 
 const int FPS = 30;
 
-void handleInput(shmup::Game &game, int ch);
+void handleInput(shmup::Core &core, shmup::Game &game, int ch);
 
 int main()
 {
@@ -34,19 +35,21 @@ int main()
             }
             else
             {
-                handleInput(game, ch);
+                handleInput(core, game, ch);
             }
         }
-
-        // Update game state
-        game.draw();
-
-        // Render the screen
-        screen.render(game.current_stage());
 
         // Cap the frame rate
         auto currentTime = std::chrono::high_resolution_clock::now();
         std::chrono::duration<float> elapsed = currentTime - lastTime;
+
+        // Update game state
+        auto elapsedMs = std::chrono::duration_cast<std::chrono::milliseconds>(elapsed).count();
+        game.draw(elapsedMs);
+
+        // Render the screen
+        screen.render(game.current_stage());
+
         if (elapsed < frameDuration)
         {
             std::this_thread::sleep_for(frameDuration - elapsed);
@@ -57,8 +60,9 @@ int main()
     return 0;
 }
 
-void handleInput(shmup::Game &game, int ch)
+void handleInput(shmup::Core &core, shmup::Game &game, int ch)
 {
+    FTLOG << "Key input: " << ch << std::endl;
     // Handle input
     switch (ch)
     {

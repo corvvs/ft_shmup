@@ -5,6 +5,8 @@ namespace shmup
 	Logger::Logger()
 	{
 		ofs.open(DefaultLogFileName, std::ios::out | std::ios::trunc);
+		ofs << std::endl
+			<< std::endl;
 	}
 
 	Logger::~Logger()

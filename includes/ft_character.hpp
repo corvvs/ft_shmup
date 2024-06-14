@@ -25,9 +25,17 @@ namespace shmup
 		// 面倒なのでpublicにしてしまう
 		Vec position;
 
+		// キャラクターの速度
+		// 使わないこともある
+		Vec velocity;
+
 		Character(Core &core, CharacterType type, const Vec &initial_position);
 
 		char get_letter() const;
+
+		// キャラクターの状態を更新する
+		// elapsed_time: 前回の更新からの経過時間(ms)
+		void update(std::uint64_t elapsed_time);
 	};
 }
 

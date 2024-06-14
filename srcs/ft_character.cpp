@@ -2,7 +2,7 @@
 
 namespace shmup
 {
-	Character::Character(Core &core, CharacterType type, const Vec &initial_position) : core(core), position(initial_position)
+	Character::Character(Core &core, CharacterType type, const Vec &initial_position) : core(core), position(initial_position), velocity(Vec(0, 0, 0))
 	{
 		this->type = type;
 		switch (type)
@@ -22,12 +22,28 @@ namespace shmup
 		default:
 			throw "Invalid character type";
 		}
-		core.log() << "Character created: " << letter << " at " << position.x << ", " << position.y << std::endl;
+		FTLOG << "Character created: " << letter << " at " << position.x << ", " << position.y << std::endl;
 	}
 
 	char Character::get_letter() const
 	{
 		return letter;
+	}
+
+	void Character::update(std::uint64_t elapsed_time_ms)
+	{
+		switch (this->type)
+		{
+		case CharacterType::BULLET:
+		{
+			position.x += (double)(elapsed_time_ms * velocity.x);
+			position.y += (double)(elapsed_time_ms * velocity.y);
+			// FTLOG << "Bullet moved to (" << position.x << ", " << position.y << ")" << std::endl;
+		}
+		break;
+		default:
+			break;
+		}
 	}
 
 } // namespace shmpup

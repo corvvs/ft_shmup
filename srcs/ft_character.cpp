@@ -30,6 +30,11 @@ namespace shmup
 		return letter;
 	}
 
+	CharacterType Character::get_type() const
+	{
+		return type;
+	}
+
 	void Character::update(std::uint64_t elapsed_time_ms)
 	{
 		switch (this->type)

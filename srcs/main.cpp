@@ -7,7 +7,7 @@
 #include "ft_game.hpp"
 #include "ft_screen.hpp"
 
-const int FPS = 30;
+const int FPS = 60;
 
 void handleInput(shmup::Core &core, shmup::Game &game, int ch);
 

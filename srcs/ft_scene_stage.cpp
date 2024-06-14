@@ -87,9 +87,25 @@ namespace shmup
 
 	void SceneStage::update(std::uint64_t elapsed_time)
 	{
-		for (auto &pair : characters)
+		// rbegin -> rend で逆にループしないと erase で死にます
+		for (auto it = characters.rbegin(); it != characters.rend(); ++it)
 		{
-			pair.second.update(elapsed_time);
+			Character &ch = it->second;
+			ch.update(elapsed_time);
+
+			// 画面外に出た弾を削除
+			switch (ch.get_type())
+			{
+			case CharacterType::BULLET:
+				if (ch.position.y < 0)
+				{
+					FTLOG << "Bullet removed: " << ch.position.x << ", " << ch.position.y << std::endl;
+					characters.erase(it->first);
+				}
+				break;
+			default:
+				break;
+			}
 		}
 	}
 

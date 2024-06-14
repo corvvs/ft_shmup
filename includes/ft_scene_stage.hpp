@@ -16,6 +16,8 @@ namespace shmup
 		size_t char_idx;
 
 		size_t add_character(const Character &ch);
+
+		// プレイヤーが弾を発射する
 		void fire_bullet();
 
 	public:
@@ -28,8 +30,13 @@ namespace shmup
 		const std::map<size_t, Character> &get_characters() const;
 
 		Character &get_player();
+
+		// 指定した番号のキャラクターを返す
+		// キャラクターが存在しない番号を入力した時の動作は不定
 		Character &get_character(size_t idx);
 
+		// ステージを時間経過させる
+		// elapsed_time: 前回の更新からの経過時間(ms)
 		void update(std::uint64_t elapsed_time);
 	};
 }

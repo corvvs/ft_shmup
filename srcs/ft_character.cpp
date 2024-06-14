@@ -36,6 +36,7 @@ namespace shmup
 		{
 		case CharacterType::BULLET:
 		{
+			position.x += (double)(elapsed_time_ms * velocity.x);
 			position.y += (double)(elapsed_time_ms * velocity.y);
 			// FTLOG << "Bullet moved to (" << position.x << ", " << position.y << ")" << std::endl;
 		}

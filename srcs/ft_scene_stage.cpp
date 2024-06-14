@@ -60,9 +60,24 @@ namespace shmup
 	void SceneStage::fire_bullet()
 	{
 		Character &player = get_player();
-		Character bullet(core, CharacterType::BULLET, player.position);
-		size_t idx = add_character(bullet);
-		get_character(idx).velocity.y = -1 / 60.0;
+		{
+			Character bullet(core, CharacterType::BULLET, player.position);
+			size_t idx = add_character(bullet);
+			get_character(idx).velocity.y = -1 / 60.0;
+		}
+		double w3way = 0.4;
+		{
+			Character bullet(core, CharacterType::BULLET, player.position);
+			size_t idx = add_character(bullet);
+			get_character(idx).velocity.x = -w3way / 60.0;
+			get_character(idx).velocity.y = -1 / 60.0;
+		}
+		{
+			Character bullet(core, CharacterType::BULLET, player.position);
+			size_t idx = add_character(bullet);
+			get_character(idx).velocity.x = +w3way / 60.0;
+			get_character(idx).velocity.y = -1 / 60.0;
+		}
 	}
 
 	const std::map<size_t, Character> &SceneStage::get_characters() const

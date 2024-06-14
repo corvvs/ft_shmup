@@ -32,7 +32,7 @@ namespace shmup
 		for (auto it = characters.begin(); it != characters.end(); ++it)
 		{
 			const auto &character = it->second;
-			mvaddch(character.position.y, character.position.x, character.get_letter());
+			mvaddch(character.position.y + 0.5, character.position.x + 0.5, character.get_letter());
 		}
 
 		// Refresh the screen to show changes

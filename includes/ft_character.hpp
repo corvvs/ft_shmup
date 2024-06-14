@@ -26,6 +26,8 @@ namespace shmup
 		Vec position;
 
 		Character(Core &core, CharacterType type, const Vec &initial_position);
+
+		char get_letter() const;
 	};
 }
 

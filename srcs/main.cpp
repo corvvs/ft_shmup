@@ -9,7 +9,6 @@
 const int FPS = 30;
 
 void handleInput(shmup::Game &game, int ch);
-void render();
 
 int main()
 {
@@ -43,7 +42,7 @@ int main()
         game.draw();
 
         // Render the screen
-        render();
+        screen.render(game.current_stage());
 
         // Cap the frame rate
         auto currentTime = std::chrono::high_resolution_clock::now();
@@ -86,16 +85,4 @@ void handleInput(shmup::Game &game, int ch)
     default:
         break;
     }
-}
-
-void render()
-{
-    // Clear the screen
-    clear();
-
-    // Render game state
-    mvprintw(0, 0, "Press 'q' to quit");
-
-    // Refresh the screen to show changes
-    refresh();
 }

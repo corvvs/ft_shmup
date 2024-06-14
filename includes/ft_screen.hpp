@@ -3,6 +3,7 @@
 
 #include <chrono>
 #include "ft_core.hpp"
+#include "ft_scene_stage.hpp"
 
 namespace shmup
 {
@@ -24,7 +25,7 @@ namespace shmup
 		~Screen();
 
 		// スクリーンを描画する
-		void render();
+		void render(const SceneStage &stage);
 	};
 }
 

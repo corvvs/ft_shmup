@@ -25,4 +25,9 @@ namespace shmup
 		core.log() << "Character created: " << letter << " at " << position.x << ", " << position.y << std::endl;
 	}
 
+	char Character::get_letter() const
+	{
+		return letter;
+	}
+
 } // namespace shmpup

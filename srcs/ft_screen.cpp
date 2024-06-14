@@ -19,7 +19,7 @@ namespace shmup
 		endwin(); // End curses mode
 	}
 
-	void Screen::render()
+	void Screen::render(const SceneStage &stage)
 	{
 		// Clear the screen
 		clear();
@@ -27,8 +27,12 @@ namespace shmup
 		// Render game state
 		mvprintw(0, 0, "Press 'q' to quit");
 
+		for (auto &character : stage.get_characters())
+		{
+			mvaddch(character.position.y, character.position.x, character.get_letter());
+		}
+
 		// Refresh the screen to show changes
 		refresh();
 	}
-
 } // namespace shmpup

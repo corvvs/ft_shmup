@@ -19,6 +19,8 @@ namespace shmup
 		// ステージに入力を与える.
 		// キーイベント発生時に呼び出される.
 		void input(KeyCode);
+
+		const std::vector<Character> &get_characters() const;
 	};
 }
 

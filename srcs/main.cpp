@@ -15,6 +15,9 @@ void render();
 
 int main()
 {
+    shmup::Core core;
+    shmup::Game game(core);
+
     initialize();
 
     int ch;

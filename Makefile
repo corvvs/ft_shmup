@@ -3,6 +3,7 @@ OBJDIR	:=	objs
 INCDIR	:=	includes
 FILES	:=	\
 			main.cpp\
+			ft_game.cpp\
 			ft_core.cpp\
 			ft_logger.cpp\
 

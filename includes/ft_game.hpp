@@ -1,5 +1,5 @@
-#ifndef FT_GAME_H
-#define FT_GAME_H
+#ifndef FT_GAME_HPP
+#define FT_GAME_HPP
 
 #include "ft_enum.hpp"
 #include "ft_core.hpp"
@@ -10,18 +10,20 @@ namespace shmup
 	{
 
 	private:
-		Core core;
+		Core &core;
 
 	public:
 		// ゲームを作成する
-		Game();
+		Game(Core &core);
 
 		// [インターフェース]
 
-		// ゲームの状態をスクリーンに描画する
+		// ゲームの状態を進め, スクリーンに描画する.
+		// タイマーにより起動される.
 		void draw();
 
-		// ゲームに入力を与える
+		// ゲームに入力を与える.
+		// キーイベント発生時に呼び出される.
 		void input(keycode);
 	};
 

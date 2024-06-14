@@ -32,6 +32,7 @@ namespace shmup
 		Character(Core &core, CharacterType type, const Vec &initial_position);
 
 		char get_letter() const;
+		CharacterType get_type() const;
 
 		// キャラクターの状態を更新する
 		// elapsed_time: 前回の更新からの経過時間(ms)

@@ -4,27 +4,25 @@
 #include <thread>
 
 #include "ft_game.hpp"
+#include "ft_screen.hpp"
 
 const int FPS = 30;
 
-void initialize();
-void cleanup();
 void handleInput(int ch);
-void update();
 void render();
 
 int main()
 {
     shmup::Core core;
     shmup::Game game(core);
-
-    initialize();
+    shmup::Screen screen(core);
 
     int ch;
     bool running = true;
     auto lastTime = std::chrono::high_resolution_clock::now();
     auto frameDuration = std::chrono::milliseconds(1000 / FPS);
 
+    // イベントループ
     while (running)
     {
         // Handle input
@@ -42,7 +40,7 @@ int main()
         }
 
         // Update game state
-        update();
+        game.draw();
 
         // Render the screen
         render();
@@ -57,24 +55,7 @@ int main()
         lastTime = currentTime;
     }
 
-    cleanup();
     return 0;
-}
-
-void initialize()
-{
-    initscr();             // Start curses mode
-    cbreak();              // Line buffering disabled
-    noecho();              // Don't echo while we do getch
-    nodelay(stdscr, TRUE); // Non-blocking input
-    keypad(stdscr, TRUE);  // Enable F1, F2, arrow keys, etc.
-    curs_set(0);           // Hide the cursor
-    timeout(0);            // Non-blocking input
-}
-
-void cleanup()
-{
-    endwin(); // End curses mode
 }
 
 void handleInput(int ch)
@@ -97,11 +78,6 @@ void handleInput(int ch)
     default:
         break;
     }
-}
-
-void update()
-{
-    // Update game state
 }
 
 void render()

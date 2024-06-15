@@ -44,16 +44,28 @@ namespace shmup
 		{
 			// 移動
 		case KeyCode::UP:
-			player.position.y--;
+			if (player.position.y > 0)
+			{
+				player.position.y--;
+			}
 			break;
 		case KeyCode::DOWN:
-			player.position.y++;
+			if (player.position.y < ScreenHeight - 1)
+			{
+				player.position.y++;
+			}
 			break;
 		case KeyCode::LEFT:
-			player.position.x--;
+			if (player.position.x > 0)
+			{
+				player.position.x--;
+			}
 			break;
 		case KeyCode::RIGHT:
-			player.position.x++;
+			if (player.position.x < ScreenWidth - 1)
+			{
+				player.position.x++;
+			}
 			break;
 			// 射撃
 		case KeyCode::SPACE:

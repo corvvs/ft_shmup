@@ -5,7 +5,11 @@ namespace shmup
 {
 	SceneStage::SceneStage(Core &core) : core(core)
 	{
+		// プレイヤーの配置
 		id_player_1 = add_character(Character(core, CharacterType::PLAYER, Vec(10, 10, 0)));
+
+		// ステージ初期処理
+		init_stage();
 	}
 
 	size_t SceneStage::add_character(const Character &ch)
@@ -24,6 +28,11 @@ namespace shmup
 	Character &SceneStage::get_character(size_t idx)
 	{
 		return characters.find(idx)->second;
+	}
+
+	const std::map<size_t, Character> &SceneStage::get_characters() const
+	{
+		return characters;
 	}
 
 	void SceneStage::input(KeyCode key)
@@ -57,8 +66,20 @@ namespace shmup
 		FTLOG << "Player moved to " << player.position.x << ", " << player.position.y << std::endl;
 	}
 
+	void SceneStage::init_stage()
+	{
+
+		// 敵を適当に配置する
+		for (int i = 0; i < 10; i++)
+		{
+			Character enemy(core, CharacterType::ENEMY_0, Vec(20 + i * 5, 5, 0));
+			add_character(enemy);
+		}
+	}
+
 	void SceneStage::fire_bullet()
 	{
+		// BULLET をプレイヤーの位置に生成したあと, 速度を与える
 		double vy = 2.6;
 		double w3way = 0.6;
 		Character &player = get_player();
@@ -79,11 +100,6 @@ namespace shmup
 			get_character(idx).velocity.x = +w3way / 60.0;
 			get_character(idx).velocity.y = -vy / 60.0;
 		}
-	}
-
-	const std::map<size_t, Character> &SceneStage::get_characters() const
-	{
-		return characters;
 	}
 
 	void SceneStage::update(std::uint64_t elapsed_time)

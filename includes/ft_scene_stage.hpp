@@ -17,6 +17,9 @@ namespace shmup
 
 		size_t add_character(const Character &ch);
 
+		// ステージの初期処理
+		void init_stage();
+
 		// プレイヤーが弾を発射する
 		void fire_bullet();
 

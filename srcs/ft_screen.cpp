@@ -1,5 +1,8 @@
 #include "ft_screen.hpp"
 #include <ncurses.h>
+#include <string>
+
+const std::string frame_horizon = std::string(ScreenWidth - 2, '-');
 
 namespace shmup
 {
@@ -25,7 +28,7 @@ namespace shmup
 		clear();
 
 		// Render game state
-		mvprintw(0, 0, "Press 'q' to quit");
+		mvprintw(1, 1, "Press 'q' to quit");
 
 		const auto &characters = stage.get_characters();
 
@@ -33,6 +36,21 @@ namespace shmup
 		{
 			const auto &character = it->second;
 			mvaddch(character.position.y + 0.5, character.position.x + 0.5, character.get_letter());
+		}
+
+		// 画面フレームの描画
+		mvaddch(0, 0, '+');
+		mvaddch(0, ScreenWidth - 1, '+');
+		mvprintw(0, 1, frame_horizon.c_str());
+
+		mvaddch(ScreenHeight - 1, 0, '+');
+		mvaddch(ScreenHeight - 1, ScreenWidth - 1, '+');
+		mvprintw(ScreenHeight - 1, 1, frame_horizon.c_str());
+
+		for (int i = 1; i < ScreenHeight - 1; i++)
+		{
+			mvaddch(i, 0, '|');
+			mvaddch(i, ScreenWidth - 1, '|');
 		}
 
 		// Refresh the screen to show changes

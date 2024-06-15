@@ -6,7 +6,7 @@ namespace shmup
 	SceneStage::SceneStage(Core &core) : core(core)
 	{
 		// プレイヤーの配置
-		id_player_1 = add_character(Character(core, CharacterType::PLAYER, Vec(10, 10, 0)));
+		id_player_1 = add_character(Character(core, CharacterType::PLAYER, Vec(ScreenWidth / 2.0, ScreenHeight * 0.8, 0)));
 
 		// ステージ初期処理
 		init_stage();
@@ -114,7 +114,7 @@ namespace shmup
 			switch (ch.get_type())
 			{
 			case CharacterType::BULLET:
-				if (ch.position.y < 0)
+				if (ch.position.y < 0 || ch.position.y >= ScreenHeight || ch.position.x < 0 || ch.position.x >= ScreenWidth)
 				{
 					FTLOG << "Bullet removed: " << ch.position.x << ", " << ch.position.y << std::endl;
 					characters.erase(it->first);

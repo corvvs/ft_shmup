@@ -121,7 +121,10 @@ namespace shmup
 		{
 			Character &ch = it->second;
 			ch.update(elapsed_time);
-
+		}
+		for (auto it = characters.rbegin(); it != characters.rend(); ++it)
+		{
+			Character &ch = it->second;
 			// 画面外に出た弾を削除
 			// 弾に当たった敵を削除
 			switch (ch.get_type())
@@ -130,30 +133,39 @@ namespace shmup
 				if (ch.position.y < 0 || ch.position.y >= ScreenHeight || ch.position.x < 0 || ch.position.x >= ScreenWidth)
 				{
 					FTLOG << "Bullet removed: " << ch.position.x << ", " << ch.position.y << std::endl;
-					characters.erase(it->first);
+					ch.marked_for_deletion = true;
 				}
 				break;
 			case CharacterType::ENEMY_0:
 				if (is_bullet_collided(ch))
 				{
 					FTLOG << "Enemy_0 removed: " << ch.position.x << ", " << ch.position.y << std::endl;
-					characters.erase(it->first);
+					ch.marked_for_deletion = true;
 				}
 				break;
 			default:
 				break;
 			}
 		}
+		for (auto it = characters.rbegin(); it != characters.rend(); ++it)
+		{
+			Character &ch = it->second;
+			if (!ch.marked_for_deletion)
+			{
+				continue;
+			}
+			characters.erase(it->first);
+		}
 
 		FTLOG << "Characters: " << characters.size() << std::endl;
 	}
 
 	bool SceneStage::is_bullet_collided(const Character &ch)
-	{// 弾が当たったか
+	{ // 弾が当たったか
 		for (auto it = characters.rbegin(); it != characters.rend(); ++it)
 		{
 			Character &tmp = it->second;
-			if(tmp.get_type() == CharacterType::BULLET && is_same_position(tmp.position, ch.position))
+			if (tmp.get_type() == CharacterType::BULLET && is_same_position(tmp.position, ch.position))
 			{
 				return true;
 			}

@@ -29,6 +29,9 @@ namespace shmup
 		// 使わないこともある
 		Vec velocity;
 
+		// 削除マーク
+		bool marked_for_deletion;
+
 		Character(Core &core, CharacterType type, const Vec &initial_position);
 
 		char get_letter() const;

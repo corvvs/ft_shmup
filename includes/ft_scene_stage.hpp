@@ -23,6 +23,12 @@ namespace shmup
 		// プレイヤーが弾を発射する
 		void fire_bullet();
 
+		// 弾との当たり判定
+		bool is_bullet_collided(const Character &ch);
+	
+		// 同じ位置か判定
+		bool is_same_position(const Vec &v1, const Vec &v2);
+
 	public:
 		SceneStage(Core &core);
 
